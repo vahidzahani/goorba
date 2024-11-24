@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat Toy</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #2e2e2e; /* خاکستری تیره */
+            overflow: hidden;
+            height: 100vh;
+        }
+        .fly {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white; /* دایره سفید */
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="fly" id="fly"></div>
+
+    <script>
+        const fly = document.getElementById('fly');
+        let posX = Math.random() * window.innerWidth; // موقعیت اولیه X
+        let posY = Math.random() * window.innerHeight; // موقعیت اولیه Y
+        let directionX = (Math.random() - 0.5) * 30; // جهت و سرعت حرکت X
+        let directionY = (Math.random() - 0.5) * 30; // جهت و سرعت حرکت Y
+
+        function moveFly() {
+            posX += directionX;
+            posY += directionY;
+
+            // برخورد با دیواره‌ها
+            if (posX <= 0 || posX >= window.innerWidth - 20) {
+                directionX = -directionX;
+            }
+            if (posY <= 0 || posY >= window.innerHeight - 20) {
+                directionY = -directionY;
+            }
+
+            // اعمال تغییر مکان
+            fly.style.transform = `translate(${posX}px, ${posY}px)`;
+
+            requestAnimationFrame(moveFly); // اجرای حرکت به صورت پیوسته
+        }
+
+        moveFly();
+    </script>
+</body>
+</html>
